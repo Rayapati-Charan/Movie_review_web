@@ -31,6 +31,7 @@ function MyLinks() {
 			
 				<li class="menu-item ">  <Link to="/"> Home</Link></li>
 				<li class="menu-item"><Link to="/Watchlist">Watch List</Link></li>
+				<li class="menu-item"><Link to="/Search">Search</Link></li>
 				<li class="menu-item">
 					<input type="button"
 						class="text-centre mybtn"
@@ -52,6 +53,7 @@ function MyLinks() {
 				<li class="menu-item"><Link to="/AddMovie">Add Movies</Link></li>
 				<li class="menu-item"><Link to="/AdminReview">Reviews</Link></li>
 				<li class="menu-item"><Link to="/Users">Users</Link></li>
+				<li class="menu-item"><Link to="/Search">Search</Link></li>
 				<li class="menu-item">
 					<input type="button"
 						class="text-centre mybtn"
@@ -71,6 +73,7 @@ function MyLinks() {
 				<li class="menu-item "> <span>  |</span> Welcome Critic</li>
 				<li class="menu-item ">  <Link to="/"> Home</Link></li>
 				<li class="menu-item"><Link to="/Watchlist">Watch List</Link></li>
+				<li class="menu-item"><Link to="/Search">Search</Link></li>
 				<li class="menu-item">
 					<input type="button"
 						class="text-centre mybtn"

@@ -294,6 +294,24 @@ app.get('/Myrating', (req, res) => {
     });
 });
 
+app.get('/search', (req, res) => {
+    const ele=req.body.ele;
+    db.query("SELECT * FROM movie where name=?",[ele], (err, results, fields) => {
+      if(err) throw err;
+         res.send(results);
+    });
+});
+
+app.post('/delete', (req, res) => {
+    console.log("Come");
+    const movieid  = req.body.movie_id;
+    const userid  = req.body.user_id;
+    db.query("delete from review where movie_id=? and user_id=?",[movieid,userid], (err, results) => {
+      if(err) throw err;
+      res.send({message:'success'})
+    });
+});
+
 app.listen(3001, () => {
     console.log("running server");
 });

@@ -2,10 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Component/header'
 import Carousel from 'react-bootstrap/Carousel'
+import { useContext } from 'react';
+import AuthContext from '../DataProvider';
 
 
 import { useNavigate } from "react-router-dom";
 export default function Home() {
+    const {userData,setUserData}=useContext(AuthContext)
+
+
+
     const nav = useNavigate();
     const [data, setData] = useState([]);
     const review = (id, name, url, rating, year, language, genre) => {
@@ -35,6 +41,12 @@ export default function Home() {
             .then(function (myJson) {
                 console.log(myJson);
                 setData(myJson)
+                const movieNames=[]
+                myJson.map((movie) =>movieNames.push(movie.name))
+                console.log(movieNames)
+                setUserData({movieNames})
+                console.log(userData)
+                
             });
     }
     useEffect(() => {

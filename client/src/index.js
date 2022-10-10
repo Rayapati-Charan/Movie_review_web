@@ -2,21 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Movies from './Component/movies'
 import Home from './Layout/Home'
-import { BrowserRouter, Redirect, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Admindash from './Layout/admindash'
 import AddMovie from './Layout/admin/addmovie'
 import AdminReview from './Layout/admin/adminreview'
 import Signup from './Component/signup'
 import UserLogin from './Component/userlogin'
-import { combineReducers } from 'redux';
-import { sessionReducer } from 'react-session';
 import Footer from './Component/footer'
 import Watchlist from './Layout/watchlist';
+import { AuthProvider } from './DataProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function App() {
   return (
-   <>
+    <>
     <BrowserRouter>
       <Routes>
         <Route>
@@ -32,7 +31,8 @@ function App() {
       </Routes>
     </BrowserRouter>
     <Footer/>
-   </>
+    </>
+  
   );
 }
 
@@ -41,7 +41,11 @@ function App() {
 
 
 root.render(
+  
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+        <App />
+    </AuthProvider>
   </React.StrictMode>
+
 );

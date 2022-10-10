@@ -6,11 +6,13 @@ import { Outlet, Link } from "react-router-dom";
 import Session from '../session/session';
 import { useState, useEffect } from 'react'
 import Axios from 'axios';
-import Movies from './movies'
+import Movies from './movies';
+import AuthContext from '../DataProvider';
+import {useContext} from 'react';
 Axios.defaults.withCredentials = true;
 
 class Rating extends React.Component {
- 
+  
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -46,6 +48,7 @@ class Rating extends React.Component {
       hovered: rating
     });
   }
+  
   setstatus(message) {
     this.setState({message: message});
   }
@@ -55,7 +58,7 @@ class Rating extends React.Component {
   }
   
   submit() {
-     
+
     const role = Session.getrole();
     const mid = Session.getmid();
     const session = sessionStorage.getItem("key");
@@ -75,8 +78,14 @@ class Rating extends React.Component {
         }
         else {
             document.getElementById('rev').value=response.data.message;
-            const dt=document.getElementById('rev');
+            var dt=document.getElementById('rev');
             dt.disabled='true';
+            var bt=document.getElementById('edit');
+            bt.style.visibility='visible';
+            bt=document.getElementById('chang');
+            bt.style.visibility='hidden';
+            bt=document.getElementById('del');
+            bt.style.visibility='hidden';
             this.setstatus("You Cannot post more than one Review on a Movie");
 
         }
@@ -90,16 +99,16 @@ class Rating extends React.Component {
   active(){
     var bt=document.getElementById('rev');
     bt.disabled=false;
-    bt=document.getElementById('chang');
-    bt.disabled=false;
-    bt=document.getElementById('del');
-    bt.disabled=false;
     bt=document.getElementById('edit');
     bt.style.visibility='hidden';
+    bt=document.getElementById('chang');
+    bt.style.visibility='visible';
+    bt=document.getElementById('del');
+    bt.style.visibility='visible';
   }
 
   revchange() {
-     
+    console.log("Called")
     const role = Session.getrole();
     const mid = Session.getmid();
     const session = sessionStorage.getItem("key");
@@ -125,8 +134,33 @@ class Rating extends React.Component {
     }
   }
   
-  render() {
+  del() {
+    console.log("Called")
+    const mid = Session.getmid();
+    const session = sessionStorage.getItem("key");
+    //form submit
+    //alert(this.state.rating+" "+this.state.value+" "+mid+" "+role+" "+session)
+      console.log('Added')
+      Axios.post("http://localhost:3001/delete", {
+        movie_id:mid,
+        user_id:session,
+    }).then((response) => {
+        if (response.data.message == "success") {
+         this.setstatus("Review Deleted Sucessfully");
+         var bt=document.getElementById('rev').value='';
+         bt=document.getElementById('edit');
+            bt.style.visibility='visible';
+            bt=document.getElementById('chang');
+            bt.style.visibility='hidden';
+            bt=document.getElementById('del');
+            bt.style.visibility='hidden';
+        }
+    });
+    
+    
+  }
 
+  render() {
     const { stars, rating, hovered, deselectedIcon, selectedIcon } = this.state;
 
     //   <h5>{this.state.stars.length}</h5>
@@ -135,7 +169,6 @@ class Rating extends React.Component {
       <div class="contact-form text-center">
         <div className="rating2 row">
           <hr />
-
 
           {//stars hooks
           }
@@ -164,6 +197,7 @@ class Rating extends React.Component {
           })}
           <h6 >{rating}/10</h6>
         </div>
+        <inputarea/>
         <textarea class=""
           id='rev' name="text"
           alue={this.state.value}
@@ -173,16 +207,18 @@ class Rating extends React.Component {
         <h4>{this.state.message}</h4>
         <input type="button" id='sub' class="text-centre"
           name="submit" value="Submit"
-          onClick={() => this.submit()} />
-        <input type="button" id='edit' class="text-centre"
-          name="changerev" value="Edit Review"
-          onClick={() => this.active()} />
-          <input type="button" id='chang' class="text-centre"
-          name="changrev" value="Change Review"
-          onClick={() => this.revchange()}/>
-          <input type="button" id='del' class="text-centre"
-          name="Delrev" value="Delete review" disabled='true' />
-          
+          onClick={ ()=>this.submit()} />
+        <input type="button" id='edit' style={{width:'100px',alignText:'center'}} class="text-centre"
+          name="changerev" value="Edit"
+          onClick={ ()=>this.active()} />
+          <div class='row'>
+          <input type="button" id='chang' class="col text-centre"
+          name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'green'}} value="Change Review"
+          onClick={ () =>this.revchange()} />
+          <input type="button" id='del' class="col text-centre"
+          name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'red'}} value="Change Review"
+          onClick={ () => this.del()} />
+          </div>
       </div>
     );
   }

@@ -8,12 +8,15 @@ import Session from '../session/session';
 import { useState, useEffect } from 'react'
 import Axios from 'axios';
 import Rating from './Rating'
+import { useContext } from 'react';
+import AuthContext from '../DataProvider';
 import './mystyle.css'
 Axios.defaults.withCredentials = true;
 
 function Form() {
   var session = sessionStorage.getItem("key");
-  if (session=='null') {
+  console.log(session);
+  if (session==null) {
     return (
       <>
         <h5>Please Login to Submit Your Review</h5>
@@ -38,6 +41,7 @@ function Form() {
 export default function Movies() {
   const [data, setData] = useState([]);
   const [rate,setRate] = useState([]);
+  const {userData,setUserData}=useContext(AuthContext)
   //critic review count
   var critic =0,strMessage="";
   //session
@@ -61,15 +65,19 @@ export default function Movies() {
         })
         .then(function (myJson) {
             console.log(myJson);
+            console.log(location.state.id);
             setData(myJson)
+            const movieNames=[]
+                myJson.map((movie) =>{if(movie.user_id==session && movie.movie_id==location.state.id){movieNames.push(movie.value)}})
+                console.log(movieNames)
+                setUserData({movieNames})
+                console.log(userData)
         });
 }
 useEffect(() => {
     getData()
 }, [])
-
 // criric rating 
-
 {data.map((item) => {if(item.user_id==session){critic++}} )}
 if(critic >=3){
   strMessage="Critic Review"}
@@ -125,7 +133,7 @@ if(critic >=3){
                   <ul class="starring">
                 
                     <h3>{strMessage}</h3>
-
+                    
                     <Form />
                     
                   </ul>
