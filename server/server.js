@@ -167,6 +167,45 @@ app.post('/movie', (req, res) => {
    });
 //submit rating 
 //
+
+app.post('/usermovie', (req, res) => {
+    const moviename  = req.body.title;
+    const year = req.body.year;
+    const language = req.body.language;
+    const genre = req.body.genre;
+    const rating =0;
+    const url = req.body.url;
+    db.execute("select * from usermovies where name=? and url=?",[moviename,url],(err,result)=>{
+        if(err) throw err;
+        if(result.length > 0){
+            res.send({message:'Movie Already Exists'})
+        }
+        else{
+            db.execute(
+                "INSERT INTO usermovies (name,year,genre,language,rating,url) values(?,?,?,?,?,?) ",
+                [moviename,year,genre,language,rating,url],
+                (err, result)=> {
+                  // console.log(result);
+                    if (err) {
+                       console.log(err); 
+                    }
+                    if (result.length > 0) {
+                        res.send({message: "success"});
+                        }
+                   if(result.length <= 0)
+                   {
+                    res.send({ message: "error" })
+                   }
+                  
+                    }
+                
+            );
+        }
+    
+    })
+    
+   });
+
 app.post('/changerev',(req,res)=>{
     const movieid  = req.body.movie_id;
     const rating =req.body.rating;
@@ -200,6 +239,8 @@ app.post('/changerev',(req,res)=>{
     })
 })
 
+
+
 app.post('/rating', (req, res) => {
 
     const movieid  = req.body.movie_id;
@@ -212,22 +253,8 @@ app.post('/rating', (req, res) => {
         if(err) throw err;
         if(results.length > 0)
         { 
-            dat = JSON.stringify(results);
-            var c=0;
-            var str='';
-            for(var i =0 ; i<dat.length;i++){
-                if(dat[i]=='"' && c!=3){
-                    c+=1;
-                    continue;
-                }
-                if(dat[i]=='"'){
-                    break;
-                }
-                if(c==3){
-                    str+=dat[i];
-                    continue;
-                }
-            }
+            str=''
+            results.map((data)=>str+=data.value)
             res.send({ message:str})
         }
         else{
@@ -284,6 +311,15 @@ app.get('/mymovies', (req, res) => {
 });
 //rating details 
 
+
+app.get('/adminmovies', (req, res) => {
+    db.query("SELECT * FROM usermovies", (err, results, fields) => {
+      if(err) throw err;
+         res.send(results);
+    });
+});
+
+
 //get movie id
 var mid = 0;
 app.get('/Myrating', (req, res) => {
@@ -309,6 +345,33 @@ app.post('/delete', (req, res) => {
     db.query("delete from review where movie_id=? and user_id=?",[movieid,userid], (err, results) => {
       if(err) throw err;
       res.send({message:'success'})
+    });
+});
+
+app.post('/moviedelete', (req,response, fields) => {
+    console.log("Come");
+    const id  = req.body.movie_id;
+    const name  = req.body.movie_name;
+    db.query("delete from usermovies where name=? and sl=?",[name,id], (err, results) => {
+      if(err) throw err;
+      response.send({message:'success'})
+    });
+});
+
+app.post('/admindelete', (req, res) => {
+    
+    const id  = req.body.movie_id;
+    const name  = req.body.movie_name;
+    db.query("delete from movie where name=? and sl=?",[name,id], (err, results) => {
+      if(err) throw err;
+      res.send({message:'success'})
+    });
+});
+
+app.get('/users', (req, res) => {
+    db.query("SELECT * FROM users", (err, results, fields) => {
+      if(err) throw err;
+         res.send(results);
     });
 });
 

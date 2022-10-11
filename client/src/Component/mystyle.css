@@ -1,3 +1,9 @@
+.nav{
+  align-items: center;
+}
+.bgim{
+  background-color: #2b16d1;
+}
 .myloginbox{
     margin-top:5%;
     margin-right:30%;
@@ -96,6 +102,7 @@
     color: white;
   }
   .badge:hover{
+    font-size: medium;
     background-color: white;
     color:  #ffaa3c;
     border-color:#ffaa3c;

@@ -6,9 +6,9 @@ import { Outlet, Link } from "react-router-dom";
 import Session from '../session/session';
 import { useState, useEffect } from 'react'
 import Axios from 'axios';
-import Movies from './movies';
-import AuthContext from '../DataProvider';
 import {useContext} from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 Axios.defaults.withCredentials = true;
 
 class Rating extends React.Component {
@@ -25,6 +25,8 @@ class Rating extends React.Component {
       selectedIcon: "★",
       deselectedIcon: "☆"
     };
+
+    
    // var movie = Movies.location.state.sl;
     let outOf = props.outOf ? props.outOf : 10;
 
@@ -43,6 +45,7 @@ class Rating extends React.Component {
       this.props.onChange(newRating);
   }
 
+  
   hoverRating(rating) {
     this.setState({
       hovered: rating
@@ -56,10 +59,11 @@ class Rating extends React.Component {
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
+
   
   submit() {
-
     const role = Session.getrole();
+    
     const mid = Session.getmid();
     const session = sessionStorage.getItem("key");
     //form submit
@@ -74,6 +78,8 @@ class Rating extends React.Component {
         user_id:session,
     }).then((response) => {
         if (response.data.message == "success") {
+          console.log(role)
+    console.log(session)
          this.setstatus("Review Submited");
         }
         else {
@@ -133,6 +139,10 @@ class Rating extends React.Component {
      this.setstatus("Please Give a Valid rating");
     }
   }
+
+  model(){
+    
+  }
   
   del() {
     console.log("Called")
@@ -175,6 +185,7 @@ class Rating extends React.Component {
           {stars.map(star => {
             return (
               <>
+                <div class='col'>
                 <span
 
                   style={{ cursor: 'pointer' }}
@@ -189,7 +200,7 @@ class Rating extends React.Component {
                   }
 
                 </span>
-
+                </div>
               </>
 
 
@@ -214,7 +225,7 @@ class Rating extends React.Component {
           <div class='row'>
           <input type="button" id='chang' class="col text-centre"
           name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'green'}} value="Change Review"
-          onClick={ () =>this.revchange()} />
+          onClick={ () =>this.model()} />
           <input type="button" id='del' class="col text-centre"
           name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'red'}} value="Change Review"
           onClick={ () => this.del()} />

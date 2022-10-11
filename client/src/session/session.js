@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 var Session = (function() {
     var role = false;
     var mid = null;
@@ -6,11 +8,11 @@ var Session = (function() {
     };
   
     var getrole = function() {
-      return role;  
+      return role;
     };
   
     var setrole = function(userrole) {
-      role = userrole;     
+      role = userrole;
     };
     var setmid = function(m_id) {
       mid = m_id;     

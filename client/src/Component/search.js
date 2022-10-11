@@ -4,15 +4,23 @@ import Header from '../Component/header'
 import Carousel from 'react-bootstrap/Carousel'
 import { useContext } from 'react';
 import AuthContext from '../DataProvider';
-import '../Component/mystyle.css'
+import Filter from './filter';
 import { useNavigate } from "react-router-dom";
-export default function Home() {
+export default function Search() {
     const {userData,setUserData}=useContext(AuthContext)
 
 
 
     const nav = useNavigate();
+    const [movname,setmovname]=useState('')
     const [data, setData] = useState([]);
+    const search =()=>{
+        nav('/Filter',{
+            state:{
+                key:movname
+            }
+        })
+    }
     const review = (id, name, url, rating, year, language, genre,review) => {
         nav('/Movies', {
             state: {
@@ -26,6 +34,8 @@ export default function Home() {
             }
         })
     }
+
+
     const getData = () => {
         fetch('http://localhost:3001/mymovies'
             , {
@@ -63,14 +73,22 @@ export default function Home() {
         <>
 
             <Header />
-
-            <div class="bgim">
-            <div class="">
+            <div class="main-content ">
                 <div class="page">
-                    <div class="container-fluid" >
-                        <div class="row card-ti1  tl">
+                    <div class="container" style={{backgroundColor:'black',marginLeft:'5%',marginRight:'5%', width:'95%'}}>
+                        <div class="row" style={{width:'350px',height:'20px',marginBottom:'5%'}}>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="floatingInputGrid" placeholder="Search....." onChange={(e) => setmovname(e.target.value)}/>
+                                <label for="floatingInputGrid">Search</label>
+                                <div class="col d-grid gap-2 d-md-block">
+                                    <button class="btn btn-primary" type="button" oonClick={() => search()}>Button</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row card-ti  tl">
                             {data && data.length > 0 && data.map((item) =>
-                                <div class="card" style={{width: "18rem",height:'650px',marginLeft:'2%',marginRight:'2%',marginTop:'10%',backgroundColor:'white'}}>
+                                <div class="card" style={{width: "18rem",height:'650px',marginLeft:'5%',marginRight:'5%',marginTop:'10%',backgroundColor:'white'}}>
                                 <img width='150px'height='350px' src={item.url} class="card-img-top" alt="..."/>
                                 <span class="badge"  style={{fontSize:'5'}}>{item.genre}
                                             </span>
@@ -102,7 +120,6 @@ export default function Home() {
 
             <div className="container">
 
-            </div>
             </div>
         </>
 

@@ -212,7 +212,7 @@ table {
  */
 body {
   background-color: #131a20;
-  background-image: url(dummy/background.jpg);
+  background-image: url();
   background-position: top center;
   background-repeat: no-repeat;
   color: #84878d;
@@ -1380,7 +1380,7 @@ ul.arrow {
  * Header Styles
  */
 .site-header {
-  padding: 50px 0;
+  padding: 15px 0;
   *zoom: 1; }
   .site-header:after {
     content: " ";
@@ -1409,9 +1409,12 @@ ul.arrow {
     color: #9198af; }
 
 .main-navigation {
-  float: right;
+  float: left;
+  margin-left: 20%;
   background: white;
-  border-radius: 5px; }
+  border-radius: 5px;
+  
+align-items: center; }
   .main-navigation .menu-toggle, .main-navigation .menu, .main-navigation .search-form {
     display: inline-block;
     vertical-align: middle; }
@@ -1673,7 +1676,8 @@ ul.arrow {
  * Footer Styles
  */
 .site-footer {
-  padding: 50px 0; }
+  padding: 20px 0;
+ }
   .site-footer .widget {
     margin-bottom: 30px; }
   .site-footer .widget-title {

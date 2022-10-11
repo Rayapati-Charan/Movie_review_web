@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react'
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Session from '../session/session';
+import { useContext } from 'react';
+import AuthContext from '../DataProvider';
 
 Axios.defaults.withCredentials = true;
 
 export default function Userlogin() {
   const nav = useNavigate();
-
+  var {userData,setUserData}=useContext(AuthContext)
 
   const [email, setrole] = useState("");
   const [password, setpassword] = useState("");
@@ -28,15 +30,18 @@ export default function Userlogin() {
           if(response.data.role == 0)
           {
             Session.setrole(0);
+            setUserData(0);
             nav("/");
           }
           else if(response.data.role == 1)
           {
-            Session.setrole(1);
+            Session.setrole(1)
+            setUserData(1);
             nav("/Admindash");
           }
           else{
             Session.setrole(2);
+            setUserData(2);
             nav("/");
           }
         }
