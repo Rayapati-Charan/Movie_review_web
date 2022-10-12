@@ -51,7 +51,7 @@ export default function Userlogin() {
           console.log(logdetails=='1')
           console.log(window.localStorage.getItem('key')!=null)
           if(window.localStorage.getItem('key')!=null){
-            window.localStorage.clear('key')
+            window.localStorage.removeItem('key')
           }
           console.log(logdetails)
           console.log(window.localStorage.getItem('key')!=null)

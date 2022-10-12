@@ -2,26 +2,17 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Component/header'
 import Carousel from 'react-bootstrap/Carousel'
-import { useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from '../DataProvider';
-
+import '../Component/mystyle.css'
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 export default function Filter() {
     const {userData,setUserData}=useContext(AuthContext)
-    console.log(location.key)
 
-    const location = useLocation();
     const nav = useNavigate();
-    const [movname,setmovname]=useState('')
+    const {datafinder,setdatafinder}=useContext(AuthContext)
     const [data, setData] = useState([]);
-    const search =()=>{
-        nav('/Filter',{
-            state:{
-                key:movname
-            }
-        })
-    }
     const review = (id, name, url, rating, year, language, genre,review) => {
         nav('/Movies', {
             state: {
@@ -35,8 +26,6 @@ export default function Filter() {
             }
         })
     }
-
-
     const getData = () => {
         fetch('http://localhost:3001/mymovies'
             , {
@@ -51,12 +40,12 @@ export default function Filter() {
             })
             .then(function (myJson) {
                 console.log(myJson);
-                setData(myJson)
                 const movieNames=[]
-                myJson.map((movie) =>movieNames.push(movie.name))
+                console.log(datafinder)
+                var ele = window.localStorage.getItem('name')
+                myJson.map((movie) =>{if(movie.name.toUpperCase().includes(ele.toUpperCase())){movieNames.push(movie)}})
                 console.log(movieNames)
-                setUserData({movieNames})
-                console.log(userData)
+                setData(movieNames)
                 
             });
     }
@@ -74,22 +63,18 @@ export default function Filter() {
         <>
 
             <Header />
-            <div class="main-content ">
-                <div class="page">
-                    <div class="container" style={{backgroundColor:'black',marginLeft:'5%',marginRight:'5%', width:'95%'}}>
-                        <div class="row" style={{width:'350px',height:'20px',marginBottom:'5%'}}>
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" placeholder="Search....." onChange={(e) => setmovname(e.target.value)}/>
-                                <label for="floatingInputGrid">Search</label>
-                                <div class="col d-grid gap-2 d-md-block">
-                                    <button class="btn btn-primary" type="button" oonClick={() => search()}>Button</button>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="row card-ti  tl">
-                            {data && data.length > 0 && data.map((item) =>{if(item.name==location.key){
-                                <div class="card" style={{width: "18rem",height:'650px',marginLeft:'5%',marginRight:'5%',marginTop:'10%',backgroundColor:'white'}}>
+
+            <div class="bgim">
+            <div class="">
+                <div class="">
+                    
+                    <div class="container-fluid" >
+                        <br></br>
+                        <br></br>
+                    <Button variant="outline-warning" onClick={()=>nav("/Search")}>Back</Button>{' '}
+                        <div class="row card-ti1  tl">
+                            {data && data.length > 0 && data.map((item) =>
+                                <div class="card" style={{width: "18rem",height:'650px',marginLeft:'2%',marginRight:'2%',marginTop:'10%',backgroundColor:'white'}}>
                                 <img width='150px'height='350px' src={item.url} class="card-img-top" alt="..."/>
                                 <span class="badge"  style={{fontSize:'5'}}>{item.genre}
                                             </span>
@@ -97,7 +82,7 @@ export default function Filter() {
                                   <h3 class="card-title">Movie Name :{item.name}</h3>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                  <li class="list-group-item">Release Year: {item.year}</li>
+                                  <li class="list-group-item">Release Date: {item.year}</li>
                                   <li class="list-group-item">Language: {item.language}</li>
                                   <li class="list-group-item">Genre: {item.genre}</li>
                                 </ul>
@@ -111,7 +96,7 @@ export default function Filter() {
                                     item.language,
                                     item.genre)}>Give Review</button>
                                 </div>
-                              </div>}}
+                              </div>
                             )}
                            
                         </div>
@@ -121,6 +106,7 @@ export default function Filter() {
 
             <div className="container">
 
+            </div>
             </div>
         </>
 

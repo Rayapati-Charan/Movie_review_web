@@ -45,7 +45,7 @@ function MyLinks() {
 	else if (loginfo == 0 && session != 'null') {
 		return (
 			<>
-			
+				
 				<li class="menu-item ">  <Link to="/"> Home</Link></li>
 				<li class="menu-item"><Link to="/Watchlist">Watch List</Link></li>
 				<li class="menu-item"><Link to="/UserAddmovie">AddMovie</Link></li>
@@ -86,6 +86,7 @@ function MyLinks() {
 	else if (loginfo == 2 && session != 'null') {
 		return (
 			<>
+				<li class="menu-item ">  Welcome Critic</li>
 				<li class="menu-item ">  <Link to="/"> Home</Link></li>
 				<li class="menu-item"><Link to="/Watchlist">Watch List</Link></li>
 				<li class="menu-item"><Link to="/UserAddmovie">AddMovie</Link></li>
@@ -116,7 +117,7 @@ function Header() {
 						<a id="branding">
 							<img src={logo} alt="" class="logo" />
 							<div class="logo-copy " >
-								<h1 class="site-title">Review-My-Show.com</h1 >
+								<h1 class="site-title">Rating My Movie.com</h1 >
 								<small class="site-description">Find the accurate review</small>
 							</div>
 						</a>
@@ -128,7 +129,7 @@ function Header() {
 
 							<form class="search-form">
 								
-								<button><i class="fa fa-search" Link to ='/Search'></i></button>
+								<button><i class="fa fa-search" Link to ="/Search"></i></button>
 							</form>
 
 							<div class="mobile-navigation"></div>

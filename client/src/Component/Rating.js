@@ -63,7 +63,7 @@ class Rating extends React.Component {
   
   submit() {
     const role = Session.getrole();
-    
+    var flag = 0;
     const mid = Session.getmid();
     const session = sessionStorage.getItem("key");
     //form submit
@@ -78,9 +78,7 @@ class Rating extends React.Component {
         user_id:session,
     }).then((response) => {
         if (response.data.message == "success") {
-          console.log(role)
-    console.log(session)
-         this.setstatus("Review Submited");
+         window.location.reload()
         }
         else {
             document.getElementById('rev').value=response.data.message;
@@ -93,12 +91,16 @@ class Rating extends React.Component {
             bt=document.getElementById('del');
             bt.style.visibility='hidden';
             this.setstatus("You Cannot post more than one Review on a Movie");
-
+            
         }
     });
     }
     else{
      this.setstatus("Please Give a Valid rating");
+    }
+    if(flag==1){
+    window.location.reload()
+    flag=0;
     }
   }
 
@@ -138,6 +140,7 @@ class Rating extends React.Component {
     else{
      this.setstatus("Please Give a Valid rating");
     }
+    window.location.reload()
   }
 
   model(){
@@ -157,13 +160,7 @@ class Rating extends React.Component {
     }).then((response) => {
         if (response.data.message == "success") {
          this.setstatus("Review Deleted Sucessfully");
-         var bt=document.getElementById('rev').value='';
-         bt=document.getElementById('edit');
-            bt.style.visibility='visible';
-            bt=document.getElementById('chang');
-            bt.style.visibility='hidden';
-            bt=document.getElementById('del');
-            bt.style.visibility='hidden';
+         window.location.reload()
         }
     });
     
@@ -225,9 +222,9 @@ class Rating extends React.Component {
           <div class='row'>
           <input type="button" id='chang' class="col text-centre"
           name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'green'}} value="Change Review"
-          onClick={ () =>this.model()} />
+          onClick={ () =>this.revchange()} />
           <input type="button" id='del' class="col text-centre"
-          name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'red'}} value="Change Review"
+          name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'red'}} value="Delete"
           onClick={ () => this.del()} />
           </div>
       </div>

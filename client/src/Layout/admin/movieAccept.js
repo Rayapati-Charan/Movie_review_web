@@ -1,5 +1,6 @@
 import Header from '../../Component/header'
 import footer from '../../Component/footer'
+import '../../Component/mystyle.css'
 import Axios from 'axios';
 // function Movie() {
 //     return (
@@ -33,7 +34,7 @@ function del(props){
                             }
                          })
                          console.log('shift')
-                         nav('/')
+                         window.location.reload()
 }
 
 function add(props){
@@ -60,12 +61,11 @@ function add(props){
                  }).catch((error)=>{console.log(error);})
                  del(props)
                  console.log("One Added Movie");
-                 nav('/AddMovie')
+                 window.location.reload()
         }
 function AcptMovie() {
 
    const [data, setData] = useState([]);
-   var c=0;
    var getData = () => {
 
        fetch('http://localhost:3001/adminmovies'
@@ -83,8 +83,6 @@ function AcptMovie() {
            .then(function (response) {
 
                console.log(response)
-               console.log(c)
-               c++;
                return response.json();
 
            })
@@ -116,9 +114,8 @@ function AcptMovie() {
             <div class="main-content ">
                 <div class="page">
                     <div class="container">
-                        <div class="row card-ti  tl">
                             {data && data.length > 0 && data.map((item) =>
-                            <div class="card lg-3" style={{width:'13rem',marginTop:'10%'}}>
+                            <div class="card" style={{width:'13rem',marginTop:'10%'}}>
                                 <img src={item.url} class="card-img-top img-height " alt="..."/>
                                 <div class="card-body">
                                   <h5 class="card-title">Movie Name :{item.name}</h5>
@@ -130,7 +127,6 @@ function AcptMovie() {
                               </div>
                             )}
                            
-                        </div>
                     </div>
                 </div>
             </div>

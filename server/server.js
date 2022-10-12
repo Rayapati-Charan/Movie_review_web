@@ -282,7 +282,6 @@ app.post('/rating', (req, res) => {
                 }
             });
             //insert review
-            if(userid!=null){
             db.execute(
                 "INSERT INTO review (movie_id,user_id,user_role,rating,value) values(?,?,?,?,?) ",
                 [movieid,userid,userrole,rating,value],
@@ -298,7 +297,6 @@ app.post('/rating', (req, res) => {
                     }
                 
             );}
-        }
       });
    
    });
@@ -345,6 +343,28 @@ app.post('/delete', (req, res) => {
     db.query("delete from review where movie_id=? and user_id=?",[movieid,userid], (err, results) => {
       if(err) throw err;
       res.send({message:'success'})
+    });
+    db.query("SELECT * FROM review WHERE user_id = ?",[userid], (err, results, fields2) => {
+        if(err) throw err;
+        if(results.length <= 3)
+        {   
+            if(userid==1)
+            { 
+                //skip
+            }else{
+            console.log("Changed To user")
+            db.query("UPDATE users SET role = ? WHERE email = ?",[0,userid], (err, results, fields2) => {
+                if(err) throw err;
+                if(results.length > 0)
+                  { 
+                    console.log('User logged')
+                  }else{
+                    console.log(results)
+                  }
+                
+            });
+        }
+        }
     });
 });
 

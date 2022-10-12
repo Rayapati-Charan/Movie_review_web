@@ -6,11 +6,11 @@ export default function Footer() {
       <footer class="site-footer">
         
         <h5 class="footer-style">
-          Rating My Show.com | Developed by&nbsp;
+          Rating My Movie.com | Developed by&nbsp;
           <a 
             class="text-warning text-decoration-none"
-            href=""
-            target="_blank"
+            href="https://www.linkedin.com/in/charan-rayapati-b773a6223"
+            target="blank"
           >
             Rayapati Charan
           </a>

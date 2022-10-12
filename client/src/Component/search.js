@@ -8,19 +8,14 @@ import Filter from './filter';
 import { useNavigate } from "react-router-dom";
 export default function Search() {
     const {userData,setUserData}=useContext(AuthContext)
+    const {datafinder,setdatafinder}=useContext(AuthContext)
 
 
 
     const nav = useNavigate();
     const [movname,setmovname]=useState('')
     const [data, setData] = useState([]);
-    const search =()=>{
-        nav('/Filter',{
-            state:{
-                key:movname
-            }
-        })
-    }
+    
     const review = (id, name, url, rating, year, language, genre,review) => {
         nav('/Movies', {
             state: {
@@ -63,11 +58,17 @@ export default function Search() {
         getData()
     }, [])
 //
- function sum(pass){
-    pass= pass+pass;
-        return pass;
+function find(){
+    setdatafinder(movname)
+    console.log(movname)
+    if(window.localStorage.getItem('name')!=null){
+        window.localStorage.removeItem('name')
     }
-   
+    window.localStorage.setItem('name',movname)
+    console.log(window.localStorage.getItem('name'))
+    console.log("Button Enabled")
+    nav('/filter')
+} 
    
     return (
         <>
@@ -81,7 +82,7 @@ export default function Search() {
                                 <input type="text" class="form-control" id="floatingInputGrid" placeholder="Search....." onChange={(e) => setmovname(e.target.value)}/>
                                 <label for="floatingInputGrid">Search</label>
                                 <div class="col d-grid gap-2 d-md-block">
-                                    <button class="btn btn-primary" type="button" oonClick={() => search()}>Button</button>
+                                    <button class="btn btn-primary" type="button" onClick={() => find()}>Search</button>
                                 </div>
                             </div>
                             
