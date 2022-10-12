@@ -263,7 +263,7 @@ app.post('/rating', (req, res) => {
                 if(err) throw err;
                 if(results.length > 1)
                 {   
-                    if(userid==1)
+                    if(userrole==1)
                     { 
                         //skip
                     }else{
