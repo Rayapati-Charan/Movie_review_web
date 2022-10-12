@@ -42,6 +42,7 @@ Axios.defaults.withCredentials = true;
                  }).catch((error)=>{console.log(error);})
          
                  setstatus("Added Movie");
+                 window.location.reload()
         }
 
     }

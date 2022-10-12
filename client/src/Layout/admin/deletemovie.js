@@ -33,6 +33,7 @@ function del(props){
                                 
                             }
                          })
+                         window.location.reload()
 }
 
 function DeleteMovie() {

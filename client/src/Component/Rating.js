@@ -147,6 +147,7 @@ class Rating extends React.Component {
     else{
      this.setstatus("Please Give a Valid rating");
     }
+    window.location.reload()
   }
 
   model(){
@@ -173,6 +174,7 @@ class Rating extends React.Component {
             bt.style.visibility='hidden';
             bt=document.getElementById('del');
             bt.style.visibility='hidden';
+            window.location.reload()
         }
     });
     
@@ -237,7 +239,7 @@ class Rating extends React.Component {
           onClick={ () =>this.model()} />
           <h1>{this.state.check}</h1>
           <input type="button" id='del' class="col text-centre"
-          name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'red'}} value="Change Review"
+          name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'red'}} value="Delete Review"
           onClick={ () => this.del()} />
           </div>
       </div>
