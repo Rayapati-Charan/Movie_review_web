@@ -51,49 +51,37 @@ export default function Watchlist() {
         <>
 
             <Header />
-            <div class="main-content ">
+            <div class="bgim">
+            <div class="">
                 <div class="page">
-                    <div class="container">
-                        <div class="row card-ti  tl">
-                            <div class='col'>
-                            <h2>Release Date</h2>
+                    <div class="container-fluid" >
+                        <div class="row card-ti1  tl">
                             {data && data.length > 0 && data.map((item) =>
-                                <div className="col-lg-3">
-                                    <div class="card mymovie-box ">
-                                        <p class="notification">
-                                            <img src={item.url} class="card-img-top img-height " alt="..." />
-                                            <span class="badge">{item.genre}
+                                <div class="card" style={{width: "18rem",height:'650px',marginLeft:'2%',marginRight:'2%',marginTop:'10%',backgroundColor:'white'}}>
+                                <img width='150px'height='350px' src={item.url} class="card-img-top" alt="..."/>
+                                <span class="badge"  style={{fontSize:'5'}}>{item.genre}
                                             </span>
-                                        </p>
-                                        <div class="rating">
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span></span>
-                                        </div>
-                                        <div class="card-body card-wi">
-                                            <h5 class="left">
-                                                <button href="#" id="myBtn-" class="mybtn1"
-                                                    onClick={() => review(item.sl,
-                                                        item.name,
-                                                        item.url,
-                                                        item.rating,
-                                                        item.year,
-                                                        item.language,
-                                                        item.genre)}>Give a Review</button></h5>
-                                            <h5 class="card-title">Movie Name :{item.name}
-                                            </h5>
-                                            <h5 class="card-text">Release Year: {item.year}</h5>
-                                            <h5 class="card-text">Language: {item.language}</h5>
-
-                                        </div>
-                                    </div>
+                                <div class="card-body">
+                                  <h3 class="card-title">Movie Name :{item.name}</h3>
                                 </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">Release Date: {item.year}</li>
+                                  <li class="list-group-item">Language: {item.language}</li>
+                                  <li class="list-group-item">Genre: {item.genre}</li>
+                                </ul>
+                                <div class="card-body">
+                                  <button type="button" id='review' class="btn btn-light"
+                                  onClick={() => review(item.sl,
+                                    item.name,
+                                    item.url,
+                                    item.rating,
+                                    item.year,
+                                    item.language,
+                                    item.genre)}>Give Review</button>
+                                </div>
+                              </div>
                             )}
                            
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -101,6 +89,7 @@ export default function Watchlist() {
 
             <div className="container">
 
+            </div>
             </div>
         </>
 

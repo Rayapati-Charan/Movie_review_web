@@ -29,8 +29,8 @@ function del(props){
                             movie_name:props.name,
                          }).then((response)=>{
                             if(response.data.message==='success'){
-                                console.log("Admin Deleted Movie")
-                                nav('/')
+                                console.log("Admin Deleted Movie");
+                                
                             }
                          })
 }
@@ -86,12 +86,11 @@ function DeleteMovie() {
    return (
     <>
     <Header />
-            <div class="main-content ">
-                <div class="page">
-                    <div class="container">
-                        <div class="row card-ti  tl">
+            <div class="main-content">
+                <div class="dash">
+                        <div class='row card-ti1  tl'>
                             {data && data.length > 0 && data.map((item) =>
-                            <div class="card lg-3" style={{width:'13rem',marginTop:'10%'}}>
+                            <div class="card del-card" style={{width:'13rem',marginTop:'10%'}}>
                                 <img src={item.url} class="card-img-top img-height " alt="..."/>
                                 <div class="card-body">
                                   <h5 class="card-title">Movie Name :{item.name}</h5>
@@ -101,9 +100,7 @@ function DeleteMovie() {
                                 </div>
                               </div>
                             )}
-                           
                         </div>
-                    </div>
                 </div>
             </div>
        </>

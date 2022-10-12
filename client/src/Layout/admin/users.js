@@ -12,6 +12,9 @@ import '../../Component/mystyle.css'
 //movies
 export default function Users() {
     const [data, setData] = useState([]);
+    const [userdata,setuserdata] = useState([]);
+    const [criticdata, setcriticdata] = useState([]);
+    const [admindata, setadmindata] = useState([]);
     const location = useLocation();
     const getData = () => {
     
@@ -29,6 +32,18 @@ export default function Users() {
           .then(function (myJson) {
               console.log(myJson);
               setData(myJson)
+              var update=[]
+              myJson.map((val)=>{if(val.role==0){update.push(val)}})
+              setuserdata(update)
+              console.log(userdata)
+              update=[]
+              myJson.map((val)=>{if(val.role==1){update.push(val)}})
+              setcriticdata(update)
+              console.log(criticdata)
+              update=[]
+              myJson.map((val)=>{if(val.role==2){update.push(val)}})
+              setadmindata(update)
+              console.log(admindata)
           });
   }
   useEffect(() => {
@@ -48,70 +63,74 @@ export default function Users() {
             <div class="row">  
               <h2>Users</h2>
               <hr></hr>
-               { data.map((item) => {if(item.role==0){
+               { userdata.map((item) =>
                 <div class="col-lg-3">
                 <div class="row">
                      <div class=" review-box ">
                       
                      
-                                                                                    <h4>{item.user_id}</h4>
+                             <h4>{item.name}</h4>
                         <div class="col-lg-3">
                             <img class="test-img"src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" />
                         </div>
                         <div class="col-lg-9">
-                            <span>{item.rating}/10</ span> 
-                            <p>{item.value}</p>
+                            <span>{item.email}</ span> 
+                            
                        </div>
                       </div>  
                     </div>           
                 </div>
-               }})}
+               )}
 
               </div>
+              <br></br>
+              <br></br>
               <div class="row">  
               <h2>Critic</h2>
               <hr></hr>
-               { data.map((item) => {if(item.role==1){
+               { criticdata.map((item) => 
                 <div class="col-lg-3">
                 <div class="row">
                      <div class=" review-box ">
                       
                      
-                             <h4>{item.user_id}</h4>
+                             <h4>{item.name}</h4>
                         <div class="col-lg-3">
                             <img class="test-img"src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" />
                         </div>
                         <div class="col-lg-9">
-                            <span>{item.rating}/10</ span> 
-                            <p>{item.value}</p>
+                            <span>{item.email}/10</ span> 
                        </div>
                       </div>  
                     </div>           
                 </div>
-               }})}
+               )}
+               <br></br>
+              <br></br>
 
               </div>
+              <br></br>
+              <br></br>
               <div class="row">  
               <h2>Admins</h2>
               <hr></hr>
-               { data.map((item) => {if(item.role==2){
+               { admindata.map((item) =>
                 <div class="col-lg-3">
                 <div class="row">
                      <div class=" review-box ">
                       
                      
-                             <h4>{item.user_id}</h4>
+                             <h4>{item.name}</h4>
                         <div class="col-lg-3">
                             <img class="test-img"src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" />
                         </div>
                         <div class="col-lg-9">
-                            <span>{item.rating}/10</ span> 
-                            <p>{item.value}</p>
+                            <span>{item.email}/10</ span> 
                        </div>
                       </div>  
                     </div>           
                 </div>
-               }})}
+               )}
 
               </div>
             </div>

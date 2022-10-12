@@ -49,7 +49,6 @@ export default function AdminReview() {
               <h2>User Reviews</h2>
               <hr></hr>
                { data.map((item) => 
-                
               <div class="col-lg-3">
                 <div class="row">
                      <div class=" review-box ">

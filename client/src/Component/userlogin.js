@@ -11,11 +11,12 @@ Axios.defaults.withCredentials = true;
 
 export default function Userlogin() {
   const nav = useNavigate();
-  var {userData,setUserData}=useContext(AuthContext)
+  var {logdetails,setlogdetails}=useContext(AuthContext)
 
   const [email, setrole] = useState("");
   const [password, setpassword] = useState("");
   const [status, setstatus] = useState("");
+  var loginfo = 0
 
 
   const login = () => {
@@ -30,20 +31,33 @@ export default function Userlogin() {
           if(response.data.role == 0)
           {
             Session.setrole(0);
-            setUserData(0);
+            loginfo = 0
             nav("/");
           }
           else if(response.data.role == 1)
           {
             Session.setrole(1)
-            setUserData(1);
+            setlogdetails(JSON.stringify(1));
+            loginfo = 1
             nav("/Admindash");
           }
           else{
             Session.setrole(2);
-            setUserData(2);
+            setlogdetails(JSON.stringify(2));
+            loginfo = 2
             nav("/");
           }
+          
+          console.log(logdetails=='1')
+          console.log(window.localStorage.getItem('key')!=null)
+          if(window.localStorage.getItem('key')!=null){
+            window.localStorage.clear('key')
+          }
+          console.log(logdetails)
+          console.log(window.localStorage.getItem('key')!=null)
+          window.localStorage.setItem('key',loginfo)
+          console.log(window.localStorage.getItem('key'))
+          
         }
         else {
           setstatus("Wrong Email or Password");

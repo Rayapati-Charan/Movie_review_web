@@ -66,7 +66,7 @@ export default function Home() {
 
             <div class="bgim">
             <div class="">
-                <div class="page">
+                <div class="">
                     <div class="container-fluid" >
                         <div class="row card-ti1  tl">
                             {data && data.length > 0 && data.map((item) =>
@@ -78,7 +78,7 @@ export default function Home() {
                                   <h3 class="card-title">Movie Name :{item.name}</h3>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                  <li class="list-group-item">Release Year: {item.year}</li>
+                                  <li class="list-group-item">Release Date: {item.year}</li>
                                   <li class="list-group-item">Language: {item.language}</li>
                                   <li class="list-group-item">Genre: {item.genre}</li>
                                 </ul>

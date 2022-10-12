@@ -1,5 +1,5 @@
 import logo from './logo1.jpg'
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, json } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Session from '../session/session';
 import AuthContext from '../DataProvider';
@@ -13,10 +13,21 @@ function MyLinks() {
 		sessionStorage.setItem("key", null);
 		nav('/');
 	}
+
+	const loginfo = window.localStorage.getItem('key');
+	const result = JSON.stringify(loginfo)
+	console.log(result)
+	setUserData(loginfo)
+	console.log(userData)
+
+
 	
 	var session = sessionStorage.getItem("key");
 	//alert(Session.getrole()==0)
 	console.log(userData)
+	console.log(loginfo.search('key'))
+	
+	console.log(loginfo)
 	console.log(Session.getrole)
 	if (Session.getrole() == false && session == 'null' || session == null) {
 		const check = Session.getrole()
@@ -31,37 +42,13 @@ function MyLinks() {
 
 			</>)
 	}
-	else if (Session.getrole() == 0 && session != 'null') {
+	else if (loginfo == 0 && session != 'null') {
 		return (
 			<>
 			
 				<li class="menu-item ">  <Link to="/"> Home</Link></li>
 				<li class="menu-item"><Link to="/Watchlist">Watch List</Link></li>
 				<li class="menu-item"><Link to="/UserAddmovie">AddMovie</Link></li>
-				<li class="menu-item"><Link to="/S	earch">Search</Link></li>
-				<li class="menu-item">
-					<input type="button"
-						class="text-centre mybtn"
-						name="submit"
-						value="Logout"
-						onClick={() => logout()} />
-
-				</li>
-
-
-
-			</>)
-	}
-	else if (Session.getrole() == 1 && session != 'null') {
-		return (
-			<>
-				<li class="menu-item "> <span>  |</span>  Welcome Admin</li>
-				<li class="menu-item ">  <Link to="/"> Home</Link></li>
-				<li class="menu-item"><Link to="/AddMovie">Add Movies</Link></li>
-				<li class="menu-item"><Link to="/AdminReview">Reviews</Link></li>
-				<li class="menu-item"><Link to="/movieAccept">Accept Movie</Link></li>
-				<li class="menu-item"><Link to="/DeleteMovie">Delete Movie</Link></li>
-				<li class="menu-item"><Link to="/Users">Users</Link></li>
 				<li class="menu-item"><Link to="/Search">Search</Link></li>
 				<li class="menu-item">
 					<input type="button"
@@ -76,10 +63,29 @@ function MyLinks() {
 
 			</>)
 	}
-	else if (Session.getrole() == 2 && session != 'null') {
+	else if (loginfo == 1 && session != 'null') {
 		return (
 			<>
-				<li class="menu-item "> <span>  |</span> Welcome Critic</li>
+				<li class="menu-item ">  Welcome Admin</li>
+				<li class="menu-item ">  <Link to="/"> Home</Link></li>
+				<li class="menu-item"><Link to="/Admindash">Dashboard</Link></li>
+				<li class="menu-item"><Link to="/Search">Search</Link></li>
+				<li class="menu-item">
+					<input type="button"
+						class="text-centre mybtn"
+						name="submit"
+						value="Logout"
+						onClick={() => logout()} />
+
+				</li>
+
+
+
+			</>)
+	}
+	else if (loginfo == 2 && session != 'null') {
+		return (
+			<>
 				<li class="menu-item ">  <Link to="/"> Home</Link></li>
 				<li class="menu-item"><Link to="/Watchlist">Watch List</Link></li>
 				<li class="menu-item"><Link to="/UserAddmovie">AddMovie</Link></li>
@@ -104,7 +110,7 @@ function Header() {
 
 	return (
 		<>
-			<div id="site-content" >
+			<div id="site-content" class='header'>
 				<div class="site-header">
 					<div class="container-fluid ">
 						<a id="branding">
@@ -121,8 +127,8 @@ function Header() {
 							</ul>
 
 							<form class="search-form">
-								<input type="text" placeholder="Search..." />
-								<button><i class="fa fa-search"></i></button>
+								
+								<button><i class="fa fa-search" Link to ='/Search'></i></button>
 							</form>
 
 							<div class="mobile-navigation"></div>
