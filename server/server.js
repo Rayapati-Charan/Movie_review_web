@@ -268,7 +268,7 @@ app.post('/rating', (req, res) => {
                         //skip
                     }else{
                     console.log("Critic Updated")
-                    db.query("UPDATE users SET role = ? WHERE email = ? and role != 1",[2,userid], (err, results, fields2) => {
+                    db.query("UPDATE users SET role = ? WHERE email = ?",[2,userid], (err, results, fields2) => {
                         if(err) throw err;
                         if(results.length > 0)
                           { 
@@ -353,7 +353,7 @@ app.post('/delete', (req, res) => {
                 //skip
             }else{
             console.log("Changed To user")
-            db.query("UPDATE users SET role = ? WHERE email = ?",[0,userid], (err, results, fields2) => {
+            db.query("UPDATE users SET role = ? WHERE email = ? and role != 1",[0,userid], (err, results, fields2) => {
                 if(err) throw err;
                 if(results.length > 0)
                   { 
