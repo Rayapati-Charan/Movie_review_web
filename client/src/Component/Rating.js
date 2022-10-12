@@ -237,7 +237,7 @@ class Rating extends React.Component {
           onClick={ () =>this.model()} />
           <h1>{this.state.check}</h1>
           <input type="button" id='del' class="col text-centre"
-          name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'red'}} value="Change Review"
+          name="changerev" style={{visibility:'hidden',width:'200px',backgroundColor:'red'}} value="Delete Review"
           onClick={ () => this.del()} />
           </div>
       </div>
