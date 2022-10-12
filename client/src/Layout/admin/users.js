@@ -37,11 +37,11 @@ export default function Users() {
               setuserdata(update)
               console.log(userdata)
               update=[]
-              myJson.map((val)=>{if(val.role==1){update.push(val)}})
+              myJson.map((val)=>{if(val.role==2){update.push(val)}})
               setcriticdata(update)
               console.log(criticdata)
               update=[]
-              myJson.map((val)=>{if(val.role==2){update.push(val)}})
+              myJson.map((val)=>{if(val.role==1){update.push(val)}})
               setadmindata(update)
               console.log(admindata)
           });
@@ -99,7 +99,7 @@ export default function Users() {
                             <img class="test-img"src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" />
                         </div>
                         <div class="col-lg-9">
-                            <span>{item.email}/10</ span> 
+                            <span>{item.email}</ span> 
                        </div>
                       </div>  
                     </div>           
@@ -125,7 +125,7 @@ export default function Users() {
                             <img class="test-img"src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" />
                         </div>
                         <div class="col-lg-9">
-                            <span>{item.email}/10</ span> 
+                            <span>{item.email}</ span> 
                        </div>
                       </div>  
                     </div>           
