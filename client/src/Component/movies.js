@@ -15,8 +15,11 @@ Axios.defaults.withCredentials = true;
 
 function Form() {
   var session = sessionStorage.getItem("key");
+  if(session == null){
+    session ="null"
+  }
   console.log(session);
-  if (session=='null' || Session.getrole() == false) {
+  if (session=="null") {
     return (
       <>
         <h5>Please Login to Submit Your Review</h5>
