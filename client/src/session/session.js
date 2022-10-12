@@ -2,7 +2,7 @@ import { useState } from "react";
 
 var Session = (function() {
     var role = false;
-    var mid = null;
+    var mid = "null";
     var getmid = function() {
       return mid;   
     };
