@@ -11,6 +11,7 @@ export default function Filter() {
     const {userData,setUserData}=useContext(AuthContext)
 
     const nav = useNavigate();
+    const[check,setcheck]=useState('')
     const {datafinder,setdatafinder}=useContext(AuthContext)
     const [data, setData] = useState([]);
     const review = (id, name, url, rating, year, language, genre,review) => {
@@ -45,7 +46,11 @@ export default function Filter() {
                 var ele = window.localStorage.getItem('name')
                 myJson.map((movie) =>{if(movie.name.toUpperCase().includes(ele.toUpperCase())){movieNames.push(movie)}})
                 console.log(movieNames)
+                if(movieNames.length<1){
+                    setcheck('No Data Available....')
+                }
                 setData(movieNames)
+                
                 
             });
     }
@@ -67,12 +72,12 @@ export default function Filter() {
             <div class="bgim">
             <div class="">
                 <div class="">
-                    
                     <div class="container-fluid" >
                         <br></br>
                         <br></br>
                     <Button variant="outline-warning" onClick={()=>nav("/Search")}>Back</Button>{' '}
                         <div class="row card-ti1  tl">
+                            <h1><p id='check'>{check}</p></h1>
                             {data && data.length > 0 && data.map((item) =>
                                 <div class="card" style={{width: "18rem",height:'650px',marginLeft:'2%',marginRight:'2%',marginTop:'10%',backgroundColor:'white'}}>
                                 <img width='150px'height='350px' src={item.url} class="card-img-top" alt="..."/>
@@ -96,16 +101,13 @@ export default function Filter() {
                                     item.language,
                                     item.genre)}>Give Review</button>
                                 </div>
+                                
                               </div>
                             )}
                            
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div className="container">
-
             </div>
             </div>
         </>

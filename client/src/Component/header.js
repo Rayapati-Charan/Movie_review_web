@@ -11,6 +11,7 @@ function MyLinks() {
 	function logout() {
 		Session.setrole(false);
 		sessionStorage.setItem("key", null);
+		console.log(sessionStorage.getItem('key'))
 		nav('/');
 	}
 

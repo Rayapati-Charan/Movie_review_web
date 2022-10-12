@@ -28,6 +28,7 @@ export default function Userlogin() {
       }).then((response) => {
         if (response.data.message === "success") {
           sessionStorage.setItem("key", email);
+          console.log(response.data.role)
           if(response.data.role == 0)
           {
             Session.setrole(0);
