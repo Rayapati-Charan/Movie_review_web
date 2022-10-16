@@ -26,7 +26,6 @@ function MyLinks() {
 	var session = sessionStorage.getItem("key");
 	//alert(Session.getrole()==0)
 	console.log(userData)
-	console.log(loginfo.search('key'))
 	
 	console.log(loginfo)
 	console.log(Session.getrole)
